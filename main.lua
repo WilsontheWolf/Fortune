@@ -228,24 +228,20 @@ SMODS.Joker {
     cost = 6,
 }
 
-Trafficcolors = {
-    ["RED"] = G.C.RED,
-    ["BLUE"] = G.C.BLUE
-}
 SMODS.Joker {
     key = "trafficlight",
     rarity = 1,
     atlas = "FortuneJokers",
     pos = { x = 2, y = 2 },
     cost = 6,
-    config = { extra = { blue = false, increase = 1, textvar = "Discard", colour = "RED", } },
+    config = { extra = { blue = false, increase = 1, } },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
                 card.ability.extra.increase,
-                card.ability.extra.textvar,
+                card.ability.extra.blue and "Hand" or "Discard",
                 colours = {
-                    Trafficcolors[card.ability.extra.colour],
+                    card.ability.extra.blue and G.C.BLUE or G.C.RED,
                 },
             }
         }
@@ -254,21 +250,25 @@ SMODS.Joker {
         ---I know about context.main_eval, but if possible i want this to be backwards compatible with old calc
         if context.end_of_round and not context.game_over and not context.individual and not context.repetition and not context.blueprint then
             if card.ability.extra.blue == false then
-                local obj = G.P_CENTERS.j_RAXD_trafficlight
                 card.ability.extra.blue = true
-                card.ability.extra.colour = "BLUE"
-                card.ability.extra.textvar = "Hand"
-                obj.pos.y = 3
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        self:set_sprites(card)
+                        return true
+                    end
+                }))
                 card_eval_status_text(card, 'extra', nil, nil, nil,
-                    { message = localize('k_light_blue'), colour = G.C.BLUE })
+                { message = localize('k_light_blue'), colour = G.C.BLUE })
             else
-                local obj = G.P_CENTERS.j_RAXD_trafficlight
                 card.ability.extra.blue = false
-                card.ability.extra.colour = "RED"
-                card.ability.extra.textvar = "Discard"
-                obj.pos.y = 2
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        self:set_sprites(card)
+                        return true
+                    end
+                }))
                 card_eval_status_text(card, 'extra', nil, nil, nil,
-                    { message = localize('k_light_red'), colour = G.C.RED })
+                { message = localize('k_light_red'), colour = G.C.RED })
             end
         end
         if context.setting_blind then
@@ -278,6 +278,9 @@ SMODS.Joker {
                 ease_discard(card.ability.extra.increase)
             end
         end
+    end,
+    set_sprites = function(self, card, front)
+        card.children.center:set_sprite_pos({x = self.pos.x, y = card.ability.extra.blue and 3 or 2})
     end
 }
 
