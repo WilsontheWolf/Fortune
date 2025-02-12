@@ -246,7 +246,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = G.P_CENTERS.m_mult
     end,
     calculate = function(self, card, context)
-        if context.before and next(context.poker_hands["Two Pair"]) then
+        if context.before and next(context.poker_hands["Two Pair"]) and G.GAME.current_round.hands_played == 0 then
             card:juice_up()
             if Fortune_Config.FortuneSounds then
                 play_sound("RAXD_pants", 1, 1)

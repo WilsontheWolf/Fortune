@@ -70,7 +70,8 @@ return {
 			["j_RAXD_pants"] = {
 				["name"] = "Pants On Fire",
 				["text"] = {
-					"If played hand contains a {C:attention}Two Pair{},",
+					"If {C:attention}first hand{} of round",
+					"contains a {C:attention}Two Pair{},",
 					"all played cards become {C:attention}Mult Cards",
 				},
 			},
