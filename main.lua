@@ -254,14 +254,16 @@ SMODS.Joker {
 
             end
             for index, value in ipairs(G.play.cards) do
-                card:juice_up()
-                value:set_ability(G.P_CENTERS.m_mult, nil, true)
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        value:juice_up()
-                        return true
-                    end
-                }))
+                if not value.debuff then
+                    card:juice_up()
+                    value:set_ability(G.P_CENTERS.m_mult, nil, true)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            value:juice_up()
+                            return true
+                        end
+                    }))
+                end
             end
         end
     end
