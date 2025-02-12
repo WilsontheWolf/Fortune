@@ -3,6 +3,7 @@ return {
 		["dictionary"] = {
 			["k_light_red"] = "Red Light",
 			["k_light_blue"] = "...Why is it Blue?",
+			["k_pants"] = "Pants on fire!",
 		}
 	},
 	["descriptions"] = {
@@ -19,8 +20,8 @@ return {
 			["j_RAXD_gamblecore"] = {
 				["name"] = "Gamblecore",
 				["text"] = {
-					"{C:green}#1# in #2#{} chance for scored",
-					"card to gain a random",
+					"{C:green}#1# in #2#{} chance for each",
+					"scored card to gain a random",
 					"{C:attention}Enhancement{}",
 				},
 			},
@@ -68,6 +69,10 @@ return {
 			},
 			["j_RAXD_pants"] = {
 				["name"] = "Pants On Fire",
+				["text"] = {
+					"If played hand contains a {C:attention}Two Pair{},",
+					"all played cards become {C:attention}Mult Cards",
+				},
 			},
 			["j_RAXD_bluelight"] = {
 				["name"] = "...why is it blue?",
@@ -84,10 +89,10 @@ return {
 			["j_RAXD_stairs"] = {
 				["name"] = "Stairs",
 				["text"] = {
-					"Gains {X:mult,C:white}0.2X{} when cards are",
-					"played in reverse rank order",
-					"{C:inactive}(ex: {C:attention}2 6 8 Jack Ace{C:inactive}){}",
-					"{C:inactive}(Currently {X:mult,C:white}1X{C:inactive} Mult)",
+					"Gains {X:mult,C:white}X#2#{} if played hand",
+					"is a {C:attention}Straight{} containing",
+					"no {C:attention}Face Cards{}}",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
 				},
 			},
 			["j_RAXD_burgerman"] = {
