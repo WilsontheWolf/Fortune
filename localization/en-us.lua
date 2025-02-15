@@ -27,6 +27,11 @@ return {
 			},
 			["j_RAXD_spanishbutton"] = {
 				["name"] = "The Spanish Button",
+				["text"] = {
+					"{X:mult,C:white}X#1#{} Mult if",
+					"{C:attention}Game Language{} is set to",
+					"{C:attention}Español (México){} or {C:attention}Español (España)",
+				},
 			},
 			["j_RAXD_Fishingcore"] = {
 				["name"] = "Fishingcore",

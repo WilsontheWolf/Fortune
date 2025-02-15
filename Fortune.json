@@ -9,7 +9,7 @@
 "priority": 0,
 "badge_colour": "89F99C",
 "badge_text_colour": "5ED292",
-"version": "0.3.0",
+"version": "1.0.0",
 "dependencies": [
     "Steamodded (>=1.*)",
     "Lovely (>=0.6)"

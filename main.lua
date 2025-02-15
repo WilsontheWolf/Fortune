@@ -306,12 +306,22 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "spanishbutton",
-
-
     rarity = 3,
     atlas = "FortuneJokers",
     pos = { x = 0, y = 2 },
-    cost = 6,
+    cost = 10,
+    config = { extra = { xmult = 3 }},
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main and G.SETTINGS.language == 'es_ES' or G.SETTINGS.language == 'es_419' then
+            return {
+				message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.xmult } },
+				Xmult_mod = card.ability.extra.xmult
+			}
+        end
+    end
 }
 
 SMODS.Joker {
