@@ -91,6 +91,11 @@ return {
 			},
 			["j_RAXD_entity"] = {
 				["name"] = "The Entity",
+				text = {
+					"{C:mult}+#1#{} Mult per day left",
+					"until {C:attention,E:1}her awakening{}.",
+					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+				}
 			},
 			["j_RAXD_stairs"] = {
 				["name"] = "Stairs",

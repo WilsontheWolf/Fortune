@@ -408,11 +408,52 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "entity",
-
     rarity = 2,
     atlas = "FortuneJokers",
     pos = { x = 4, y = 2 },
     cost = 6,
+    config = {
+        extra = {
+            mult_mod = 1,
+            mult = 1,
+        }
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult_mod, card.ability.extra.mult }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult = card.ability.extra.mult,
+            }
+        end
+    end,
+    update = function(self, card, dt)
+        if not card.ability.extra.year then
+            local now = os.date("*t")
+            local date = {
+                year = now.year,
+                month = 11,
+                day = 1,
+            }
+            card.ability.extra.year = now.year
+            card.ability.extra.endTime = os.time(date)
+        end
+        local today = os.date("%d%m")
+        if card.ability.extra.today ~= today then
+            card.ability.extra.today = today
+            local time = os.time()
+            local days = math.ceil(os.difftime(card.ability.extra.endTime, time) / 86400)
+            card.ability.extra.mult = card.ability.extra.mult_mod * days
+        end
+    end,
+    load = function(self, card, card_table, other_card)
+        card_table.ability.extra.year = nil
+        card_table.ability.extra.today = nil
+        card_table.ability.extra.endTime = nil
+    end,
 }
 
 ---Config UI
